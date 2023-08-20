@@ -1,0 +1,48 @@
+.photo {
+  position: relative;
+  top: 0;
+  width: 300px;
+  height: 400px;
+  object-fit: contain;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* border: 1px solid #00264d; */
+  margin: 20px auto;
+  z-index: 1;
+  transition: all 0.2ms;
+}
+
+.photo_img {
+  object-fit: cover;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.photo_details {
+  height: max-content;
+  width: 275px;
+  position: absolute;
+  top: 320px;
+  z-index: 2;
+  background-color: #00ace6;
+  color: white;
+  padding: 5px 15px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.photo-desc {
+  padding-top: 5px;
+  font-weight: 300;
+}
+
+.photo-author {
+  padding-top: 5px;
+  font-weight: 200;
+}
+
+.photo-tag {
+  font-weight: 700;
+}
