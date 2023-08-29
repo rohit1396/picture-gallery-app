@@ -2,16 +2,20 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 import { clientKey } from "./data";
 import Photo from "./Photo";
+// import { QueryGlobal } from "./context";
 
 const clientId = `?client_id=${clientKey}`;
 const mainUrl = `https://api.unsplash.com/photos/`;
 const searchUrl = `https://api.unsplash.com/search/photos/`;
+
+const data = ['Mumbai', 'Delhi', 'New york', 'Tokyo']
 
 const App = () => {
   const [loading, setLoading] = useState(false);
   const [photos, setPhotos] = useState([]);
   const [page, setPage] = useState(1);
   const [query, setQuery] = useState("");
+  // const { searchQuery} = QueryGlobal()
 
   const getPictures = async () => {
     setLoading(true);
@@ -20,7 +24,8 @@ const App = () => {
     const urlQuery = `&query=${query}`;
     if (query) {
       url = `${searchUrl}${clientId}${urlPage}${urlQuery}`;
-    } else {
+    }
+     else {
       url = `${mainUrl}${clientId}${urlPage}`;
     }
     try {
@@ -47,6 +52,26 @@ const App = () => {
     }
     setPage(1);
   };
+
+  const handleOptionChange = (e) => {
+   let option = e.target.value;
+    setQuery(option)
+    setPage(1);
+  }
+
+  useEffect(() => {
+    getPictures();
+  }, [handleOptionChange]);
+
+  const parentCallback = (description) => {
+    setQuery(description);
+  }
+
+  useEffect(() => {
+    getPictures();
+  }, [parentCallback])
+
+
   return (
     <main className="app">
       <section>
@@ -62,10 +87,17 @@ const App = () => {
           <button className="form-btn" type="submit">
             Search
           </button>
+          <select onChange={handleOptionChange}>
+            {data.map((item) => {
+              return (
+                <option key={item} value={item}>{item}</option>
+              )
+            })}
+          </select>
         </form>
         <section className="photos">
           {photos?.map((photo) => {
-            return <Photo key={photo.id} photo={photo} />;
+            return <Photo key={photo.id} photo={photo} parentCallback={parentCallback}/>;
           })}
         </section>
       </section>
