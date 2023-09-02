@@ -6,6 +6,7 @@ import Photo from "./Photo";
 const clientId = `?client_id=${clientKey}`;
 const mainUrl = `https://api.unsplash.com/photos/`;
 const searchUrl = `https://api.unsplash.com/search/photos/`;
+const data = ["mumbai", "Delhi", "New York", "tokyo"];
 
 const App = () => {
   const [loading, setLoading] = useState(false);
@@ -35,9 +36,17 @@ const App = () => {
     }
   };
 
-  useEffect(() => {
-    getPictures();
-  }, [page]);
+  const parentCallback = (newData) => {
+    let newString = newData;
+    setQuery(newString);
+    setPage(1);
+  };
+
+  const handleOptions = (e) => {
+    let option = e.target.value;
+    setQuery(option);
+    setPage(1);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -47,6 +56,19 @@ const App = () => {
     }
     setPage(1);
   };
+
+  useEffect(() => {
+    getPictures();
+  }, [handleOptions]);
+
+  useEffect(() => {
+    getPictures();
+  }, [parentCallback]);
+
+  useEffect(() => {
+    getPictures();
+  }, [handleSubmit]);
+
   return (
     <main className="app">
       <section>
@@ -62,14 +84,26 @@ const App = () => {
           <button className="form-btn" type="submit">
             Search
           </button>
+          <select onChange={handleOptions}>
+            {data.map((item) => {
+              return (
+                <option key={item} value={item}>
+                  {item}
+                </option>
+              );
+            })}
+          </select>
         </form>
+
         <section className="photos">
           {photos?.map((photo) => {
-            return <Photo key={photo.id} photo={photo} />;
+            return (
+              <Photo key={photo.id} photo={photo} newQuery={parentCallback} />
+            );
           })}
         </section>
       </section>
-      <div className="loading">{loading && <p>...Loading</p>}</div>
+      {/* <div className="loading">{loading && <p>...Loading</p>}</div> */}
     </main>
   );
 };
