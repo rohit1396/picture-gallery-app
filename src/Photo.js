@@ -24,8 +24,8 @@ const Photo = ({ photo, newQuery }) => {
         src={photo?.urls?.raw}
         alt={photo?.alt_description}
         effect="blur"
-        width="250px"
-        height="250px"
+        width="275px"
+        height="275px"
         // onMouseOver={() => setToggle(true)}
         // onMouseOut={() => setToggle(false)}
       />

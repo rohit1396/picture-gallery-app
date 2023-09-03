@@ -9,7 +9,7 @@
   align-items: center;
   justify-content: center;
   /* border: 1px solid #00264d; */
-  margin: 20px auto;
+  /* margin: 20px auto; */
   margin-top: 20px;
   z-index: 1;
   transition: all 0.2ms;
@@ -22,11 +22,11 @@
 }
 
 .photo_details {
-  height: auto;
-  width: 250px;
+  height: max-content;
+  width: 275px;
   position: absolute;
-  top: 320px;
-  z-index: 2;
+  top: 300px;
+  z-index: 1;
   background-color: #00ace6;
   color: white;
   padding: 5px 15px;
@@ -38,13 +38,12 @@
 .photo-desc {
   padding-top: 5px;
   font-weight: 300;
-  font-size: 20px;
+  font-size: 16px;
 }
 
 .photo-author {
   padding-top: 5px;
-
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 200;
 }
 
